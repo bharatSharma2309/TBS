@@ -1,0 +1,79 @@
+<form>
+  <div class="form-row">
+    <div class="col-2"></div>
+    <div class="col-7">
+
+      <label class="mr-sm-2" for="blogTitle">Blog Title</label>
+      <input [attr.disabled]="shouldBlogBeEditable?null:'disabled'" type="text" class="form-control" value={{blog?.blogTitle}} id="blogTitle" #blogTitle>
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="col-2"></div>
+
+    <div class="col-3">
+      <label class="mr-sm-2" for="blogCategory">Blog Category</label>
+      <select [attr.disabled]="shouldBlogBeEditable?null:'disabled'" class="custom-select mb-2 mr-sm-2 mb-sm-0" id="blogCategory" #blogCategory>
+        <option value="">Choose the Category of the Blog . . .</option>
+        <option value="Technology" [attr.selected]="blog?.blogCategory == 'Technology'?'selected':null">Technology</option>
+        <option value="Sports" [attr.selected]="blog?.blogCategory == 'Sports'?'selected':null">Sports</option>
+        <option value="Society" [attr.selected]="blog?.blogCategory == 'Society'?'selected':null">Society</option>
+        <option value="Others" [attr.selected]="blog?.blogCategory == 'Others'?'selected':null">Others</option>
+      </select>
+    </div>
+    <div class="col-4">
+      <label class="mr-sm-2 pt-2" for="blogTitle">Author</label>
+      <input [attr.disabled]="shouldBlogBeEditable?null:'disabled'" type="text" class="form-control" value={{blog?.blogAuthor}} id="blogAuthor" #blogTitle>
+    </div>
+  </div>
+
+  <div class="form-row mt-3">
+
+    <div class="col-2"></div>
+    <div class="col-7">
+      <label class="mr-sm-2" for="blogContent">Blog Content</label>
+      <textarea [attr.disabled]="shouldBlogBeEditable? null:'disabled'" style="background-color: #d2ffcc; height: 60vh;" type="text" class="form-control" id="blogContent" #blogContent>{{blog?.blogContent}}</textarea>
+    </div>
+  </div>
+
+  <div class="form-row mt-3">
+
+    <div class="col-2"></div>
+    <div class="col-3" (click)="toggleEditing()">
+      <button [attr.disabled]="shouldBlogBeEditable?'disabled':null" type="button" class="btn btn-outline-warning">EDIT</button>
+    </div>
+
+    <div class="col-2" (click)="updateThisBlog()">
+      <button [attr.disabled]="shouldBlogBeEditable?null:'disabled'" type="button" class="btn btn-outline-success">SAVE</button>
+    </div>
+
+    <div align="right" class="col-2">
+
+      <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+
+        <div class="btn-group" role="group">
+          <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            DELETE THIS BLOG
+          </button>
+          <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+            <a class="dropdown-item" (click)="deleteThisBlog(blog?.id)">CONFIRM DELETE </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div class="form-row">
+
+    <div class="col-2"></div>
+    <div align="right" class="col-7">
+      <hr>
+    </div>
+  </div>
+
+
+
+
+</form>

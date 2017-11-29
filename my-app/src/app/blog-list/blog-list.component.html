@@ -1,0 +1,64 @@
+<div class="container">
+  <hr>
+  <div class="card-deck"  *ngFor="let filteredBlog of filteredBlogs" >
+
+
+    <a [routerLink]="['/',filteredBlog?.id]">
+      <div class="card mt-5">
+
+        <div class="card-body">
+          <h4 class="card-title">{{filteredBlog?.blogTitle}}</h4>
+          <p class="card-text">{{filteredBlog?.blogContent}}</p>
+        </div>
+        <div class="card-footer">
+          <small class="text-muted">{{filteredBlog?.blogAuthor}} writes in </small>
+          <small class="text-muted">{{filteredBlog?.blogCategory}} Category.</small>
+        </div>
+
+
+      </div>
+    </a>
+
+  </div>
+  <hr>
+
+
+
+  <div class="row fixed-bottom mb-3 mt-5 pt-5">
+
+    <div class="col-4"></div>
+
+    <div class="col-2">
+
+      <div class="input-group">
+        <div class="input-group-btn">
+          <button disabled type="button" class="btn btn-secondary">Filter via Category</button>
+          <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <span class="sr-only">Toggle Dropdown</span>
+          </button>
+          <div class="dropdown-menu">
+            <a class="dropdown-item" (click)="filterOnCategory('Sports')">Sports</a>
+            <a class="dropdown-item" (click)="filterOnCategory('Technology')">Technology</a>
+            <a class="dropdown-item" (click)="filterOnCategory('Society')">Society</a>
+            <a class="dropdown-item" (click)="filterOnCategory('Others')">Others</a>
+            <div role="separator" class="dropdown-divider"></div>
+            <a class="dropdown-item" (click)="filterOnCategory('')">All Blogs</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-3">
+      <input class="form-control mr-sm-2" type="search" #title placeholder="Search Blogs by Title (case-sensitive)" aria-label="Search">
+    </div>
+
+    <div class="col-1">
+      <button class="btn btn-outline-success my-2 my-sm-0" (click)="filterOnTitle(title.value)" type="submit">Go</button>
+    </div>
+
+  </div>
+
+
+
+
+</div>
