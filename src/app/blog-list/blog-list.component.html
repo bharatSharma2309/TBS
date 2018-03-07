@@ -1,0 +1,137 @@
+<div style="max-width: 100%">
+<nav class="navbar navbar-expand-lg navbar-light filterBar" style="box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+
+    <div class="searchArea">
+      <input onkeydown = "if (event.keyCode === 13)
+        document.getElementById('btnSearch').click()" class="form-control mr-sm-2" type="search" #title placeholder="Search Blogs by Title" aria-label="Search">
+    </div>
+
+    <div>
+      <button id="btnSearch" class="ml-5 btn btn-sm btn-secondary my-2 my-sm-0" (click)="getBlogsFromServer(title.value, filterButton)" type="submit">Go</button>
+    </div>
+
+    <div class="ml-5">
+
+      <div class="input-group">
+        <div class="input-group-btn">
+          <button disabled class="btn bg-dark btn-secondary text-white" style="min-width: 155px">{{filterButton}}</button>
+          <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <span class="sr-only">Toggle Dropdown</span>
+          </button>
+          <div class="dropdown-menu bg-dark border-secondary">
+            <a class="dropdown-item text-info" href="#" (click)="getBlogsFromServer(title.value, 'Sports')">Sports</a>
+            <a class="dropdown-item text-info" href="#" (click)="getBlogsFromServer(title.value, 'Technology')">Technology</a>
+            <a class="dropdown-item text-info" href="#" (click)="getBlogsFromServer(title.value, 'Society')">Society</a>
+            <a class="dropdown-item text-info" href="#" (click)="getBlogsFromServer(title.value, 'Others')">Others</a>
+            <div role="separator" class="dropdown-divider"></div>
+            <a class="dropdown-item text-warning" href="#" (click)="getBlogsFromServer(title.value, '')">All Blogs</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  <a href="#" class="btn btn-sm btn-secondary ml-5" (click)="getBlogsFromServer('','')">Refresh Blogs</a>
+
+</nav>
+<br>
+
+      <div class="row">
+
+        <div class="col-sm-1"></div>
+
+        <div class="list-group mt-2 col-sm-6">
+
+          <div *ngIf="filteredBlogs.length>0; else elseBlock">
+
+            <span class="btn border-success btn-sm btn-info ml-5 mr-5" >
+              Currently Viewing in Page: <span class="badge badge-dark mr-5">{{pageNumberToDisplay}}</span>
+            </span>
+
+            <span class="btn border-success btn-sm btn-info mt-1" >
+              Total Pages: <span class="badge badge-dark">{{totalPages}}</span>
+            </span>
+
+            <div>
+              <small class="text-muted btn-sm ml-5">Recent Blogs are shown first.</small>
+            </div>
+
+            <div class="alert alert-success">
+              <strong>{{blogs.length}} Matching Blogs were found!</strong> {{filteredBlogs.length}} Results on this page.
+            </div>
+
+            <span *ngFor="let filteredBlog of filteredBlogs">
+              <a href="#" class="mt-1 btn btn-outline-info list-group-item-action" style="box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);" (click)="showBlogSlider(filteredBlog)">
+                {{filteredBlog?.blogTitle}}
+              </a>
+              <button type="button" class="btn list-group-item-action mt-3 mb-5" data-toggle="modal" data-target="#exampleModal" (click)="setBlogForModal(filteredBlog.id)" data-whatever="@getbootstrap">Make Changes in Modal</button>
+            </span>
+
+            <!--<span>-->
+              <!--<app-modal-blog-editor></app-modal-blog-editor>-->
+            <!--</span>-->
+
+              <app-modal-blog-editor></app-modal-blog-editor>
+
+              <!--<div class="modal-dialog modal-sm" role="document">-->
+                <!--<div class="modal-content">-->
+
+                  <!--<div class="modal-header">-->
+                     <!--<h5 class="modal-title" id="exampleModalLabel">Modal Editor</h5>-->
+                     <!--<button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
+                       <!--<span aria-hidden="true">&times;</span>-->
+                     <!--</button>-->
+                  <!--</div>-->
+
+                  <!--<div class="modal-body">-->
+                    <!--<form>-->
+                      <!--<div class="form-group">-->
+                        <!--<label for="recipient-name" class="col-form-label">Category:</label>-->
+                          <!--<div class="input-group">-->
+                            <!--<div class="input-group-btn" id="recipient-name">-->
+
+                              <!--<button class="btn ml-5 border-info bg-light btn-light text-dark" style="min-width: 155px">{{blogForModal.blogCategory}}</button>-->
+
+                              <!--<button type="button" class="btn btn-light dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
+                                <!--<span class="sr-only">Toggle Dropdown</span>-->
+                              <!--</button>-->
+
+                              <!--<div class="dropdown-menu bg-light border-secondary">-->
+                                <!--<a class="dropdown-item text-info" href="#">Sports</a>-->
+                                <!--<a class="dropdown-item text-info" href="#">Technology</a>-->
+                                <!--<a class="dropdown-item text-info" href="#">Society</a>-->
+                                <!--<a class="dropdown-item text-info" href="#">Others</a>-->
+                                  <!--<div role="separator" class="dropdown-divider"></div>-->
+                                <!--<a class="dropdown-item text-warning" href="#">All Blogs</a>-->
+                              <!--</div>-->
+                            <!--</div>-->
+                          <!--</div>-->
+                      <!--</div>-->
+                      <!--<div class="form-group">-->
+                        <!--<label for="message-text" class="col-form-label">Blog Title:</label>-->
+                        <!--<textarea class="form-control border-info" id="message-text">{{blogForModal.blogTitle}}</textarea>-->
+                      <!--</div>-->
+                    <!--</form>-->
+                  <!--</div>-->
+
+                  <!--<div class="modal-footer">-->
+                     <!--<button type="button" class="btn btn-secondary" data-dismiss="modal">Discard</button>-->
+                     <!--<button type="button" class="btn btn-primary">Save Changes</button>-->
+                  <!--</div>-->
+                <!--</div>-->
+              <!--</div>-->
+
+          </div>
+
+          <ng-template #elseBlock>
+            <div class="alert alert-danger">
+              <strong>No Matching Blogs were found!</strong> Please, refine your search.
+            </div>
+          </ng-template>
+        </div>
+
+        <div class="col col-sm-1 fixed pl-5 ml-5">
+          <app-blog-side-nav [blogToDisplay]="selectedBlog" (onClose)="onClose($event)"></app-blog-side-nav>
+        </div>
+      </div>
+
+</div>

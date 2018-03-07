@@ -1,0 +1,57 @@
+<form #updateForm="ngForm" novalidate class="container jumbotron mt-5 w-75">
+  <div class="form-row">
+    <div class="col-sm-2"></div>
+    <div class="col-sm-7">
+      <label class="mr-sm-2" for="blogTitle">Title of Blog</label>
+      <input type="text" class="form-control pb-2" autofocus required [maxlength]="49" [(ngModel)]="blogToCreate.blogTitle" name="blogTitle" placeholder="Blog Title" id="blogTitle" #blogTitle="ngModel">
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="col-sm-2">
+    </div>
+
+    <div class="col-sm-3">
+      <form class="form-inline mt-4">
+        <label class="mr-sm-2" for="blogCategory">Choose the Category</label>
+        <select required [(ngModel)]="blogToCreate.blogCategory" name="blogCategory" class="custom-select mr-sm-2" style="min-width: 200px" id="blogCategory" #blogCategory>
+          <option *ngFor="let category of this.categories">
+            {{category}}
+          </option>
+        </select>
+      </form>
+    </div>
+    <div class="col-sm-4">
+      <label class="mr-sm-2 mt-3" for="blogAuthor">Enter the Name of the Author</label>
+      <input type="text" class="form-control" required [(ngModel)]="blogToCreate.blogAuthor" name="blogAuthor" placeholder="Blog Author Name" id="blogAuthor" #blogAuthor>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="col-sm-1"></div>
+    <div class="col-sm-9">
+      <label class="mr-sm-2" for="blogContent"></label>
+      <textarea style=" background-color: azure; height: 60vh;" type="text" required [(ngModel)]="blogToCreate.blogContent" name="blogContent" class="form-control" placeholder="Here, goes the Content. First 200 characters will be taken as Prelude. " id="blogContent" #blogContent></textarea>
+    </div>
+  </div>
+
+  <div class="form-row">
+
+    <div class="col-sm-2"></div>
+    <div align="right" class="col-sm-10">
+      <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+
+        <div class="btn-group mt-2" role="group">
+          <button id="btnGroupDrop1" type="button" class="btn btn-sm btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Options
+          </button>
+          <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+            <button type="submit" class="dropdown-item" [disabled]="!updateForm.form.valid" (click)="updateBlog(blogToCreate)">SAVE CHANGES</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</form>

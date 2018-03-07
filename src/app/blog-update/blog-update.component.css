@@ -1,0 +1,11 @@
+.ng-valid{
+  border-left-width: 6px;
+  border-left-color: #32767d;
+}
+
+.ng-invalid{
+  border-left-width: thick;
+  border-left-color: darksalmon;
+}
+
+

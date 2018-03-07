@@ -1,0 +1,27 @@
+<div class="row blog-post mb-3">
+  <div class="col-sm-2"></div>
+  <div class="col-sm-7">
+    <div class="container" style="min-height: 550px">
+        <div class="blogHeading blog-post-title">{{blog?.blogTitle}}</div>
+      <div class="blogAuthor">{{blog?.blogAuthor}} writes in </div><div class="blogCategory">{{blog?.blogCategory}}</div>
+      <div class="blogContent">{{blog?.blogContent}}</div>
+    </div>
+  </div>
+  <div class="col-sm-3"></div>
+
+  <div class="col-sm-2"></div>
+  <div class="col-sm-7 mt-2" align="center">
+    <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+
+      <div class="btn-group" role="group">
+        <button id="btnGroupDropForDelete" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          DELETE THIS BLOG
+        </button>
+        <div class="dropdown-menu bg-light" aria-labelledby="btnGroupDropForDelete">
+          <a class="dropdown-item" href="#" (click)="deleteThisBlog(blog?.id)">CONFIRM DELETE </a>
+        </div>
+      </div>
+    </div>
+  <input type="submit" class="btn btn-secondary" value="Update this Blog" (click)="showBlogEditor(blog)">
+  </div>
+</div>

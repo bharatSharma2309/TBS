@@ -1,0 +1,68 @@
+<div style="max-width: 100%">
+<div class="row"></div>
+
+<div class="row" style="width: 100%; overflow: hidden">
+
+  <div class="col col-sm-2"></div>
+
+  <div class="col col-sm-10 pl-5" style="min-height: 525px"><app-blog-list (totalNumberOfPages)="totalNumberOfPages($event)" [pageNumberToDisplay]="currentPageSelected" [recordsPerPage]="maximumRecordsPerPage"></app-blog-list></div>
+
+</div>
+
+<div class="row row-sm mt-5">
+
+  <div class="col col-sm-2"></div>
+
+  <div class="col col-sm-4">
+    <div class="btn-toolbar btn-sm justify-content-between" role="toolbar" aria-label="Toolbar with button groups">
+      <div class="btn-group btn-group-sm" role="group" aria-label="First group">
+        <button type="button" class="btn btn-sm btn-secondary" style="min-width: 90px" disabled>Page: {{currentPageSelected}}</button>
+
+        <button id="firstPageButton" type="button" class="btn btn-sm btn-secondary" (click)="changeCurrentPage(1)">First</button>
+        <button id="previousPageButton" type="button" class="btn btn-sm btn-secondary" (click)="changeCurrentPage(currentPageSelected-3)">&#x25C1;</button>
+
+          <span *ngFor="let page of arrayOfPagesToShow" style="min-width: 44px" (click)="changeCurrentPage(page)" class="btn btn-sm btn-secondary" >
+              <span *ngIf="page>0 && page<numberOfPages+1">
+                {{page}}
+              </span>
+          </span>
+
+          <button id="nextPageButton" type="button" class="btn btn-sm btn-secondary" (click)="changeCurrentPage(currentPageSelected+3)">&#x25B7;</button>
+          <button id="lastPageButton" type="button" class="btn btn-sm btn-secondary" (click)="changeCurrentPage(lastPage)">Last</button>
+
+      </div>
+    </div>
+  </div>
+
+  <!--<div class="col col-1"></div>-->
+
+  <div class="col col-sm-2 pl-5">
+    <div class="btn-group btn-group-sm btn-group-toggle" data-toggle="buttons">
+      <!--<div class="btn-group" role="group" aria-label="Second group">-->
+      <button type="button" class="btn btn-sm btn-secondary disabledRecordsPerPage" disabled>Records Per Page: 0{{maximumRecordsPerPage}}</button>
+
+        <label class="btn btn-sm btn-secondary" (click)="changeRecordsPerPage(1)">
+          <input type="radio" name="options" id="option0" autocomplete="off">01
+        </label>
+
+        <label class="btn btn-sm btn-secondary" (click)="changeRecordsPerPage(3)">
+          <input type="radio" name="options" id="option1" autocomplete="off">03
+        </label>
+
+        <label class="btn btn-sm btn-secondary" (click)="changeRecordsPerPage(6)">
+          <input type="radio" name="options" id="option2" autocomplete="off" (click)="changeRecordsPerPage(10)">06
+        </label>
+
+        <label class="btn btn-sm btn-secondary" (click)="changeRecordsPerPage(9)">
+          <input type="radio" name="options" id="option3" autocomplete="off" (click)="changeRecordsPerPage(15)">09
+        </label>
+      <!--</div>-->
+    </div>
+
+
+  </div>
+</div>
+
+
+
+</div>
